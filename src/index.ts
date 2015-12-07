@@ -45,7 +45,7 @@ rx.Observable.fromArray(sources)
 			arr = arr
 				.sort((a, b) => (a.count === b.count) ? 0 : (b.count > a.count) ? 1 : -1)
 				.filter(i => i.count > 2);
-			fs.writeFile(`${__dirname}/../static/source.json`, JSON.stringify(arr));
+			fs.writeFile(`${__dirname}/../source.json`, JSON.stringify(arr));
 		},
 		e => console.log(`Error: ${e}`)
 	);
