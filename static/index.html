@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Type Count</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<style>
+			body {
+				padding: 10px;
+			}
+
+			.flash {
+				color: #0000CC;
+			}
+
+			.project {
+				display: none;
+				color: #cccccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="output"></div>
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+		<script id="template" type="text/x-handlebars-template">
+			<table>
+				<tr>
+					<th>Classpath</th>
+					<th>Count</th>
+				</tr>
+				{{#.}}
+				<tr class="{{type}}">
+					<td>{{classpath}}</td>
+					<td>{{count}}</td>
+				</tr>
+				{{/.}}
+			</table>
+		</script>
+		<script>
+			$.getJSON('source.json', function (arr) { // {classpath:string, count:number} + {type:string}
+				arr.forEach(function (source) {
+					var classpath = source.classpath;
+					if (classpath.indexOf('lpims.') === 0
+							|| classpath.indexOf('com.samsung.') === 0
+							|| classpath.indexOf('b2b.') === 0
+							|| classpath.indexOf('gstech.') === 0) {
+						source['type'] = 'project';
+					} else if (classpath.indexOf('flash.') === 0
+							|| classpath.indexOf('mx.') === 0
+							|| classpath.indexOf('spark.') === 0) {
+						source['type'] = 'flash';
+					} else {
+						source['type'] = 'none';
+					}
+				});
+				console.log(arr);
+				var template = Handlebars.compile($('#template').html());
+				$('#output').html(template(arr));
+			});
+		</script>
+	</body>
+
+
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "actionscript-type-counter",
+  "description": "...",
+  "version": "0.0.1",
+  "author": {
+    "name": "Your name",
+    "email": "your@email.com",
+    "url": "https://your.github.io"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yourid/actionscript-type-counter.git"
+  },
+  "dependencies": {
+    "@reactivex/rxjs": "latest",
+    "glob": "^6.0.1"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "postinstall": "npm run project-init",
+    "project-init": "tsd install node --resolve --save",
+    "vendor-update": "npm update && tsd update --overwrite --save",
+    "build": "tsc -p src",
+    "test": "npm run build && node dist/index.js"
+  }
+}

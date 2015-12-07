@@ -1,0 +1,11 @@
+.idea
+*.iml
+
+node_modules
+*.log
+
+dist
+src/typings
+
+sources
+getRepositories.sh
